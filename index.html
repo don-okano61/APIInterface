@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Facts 🐱</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        h1 { color: #333; }
+        .fact { font-size: 20px; margin-top: 20px; }
+        button { margin-top: 20px; padding: 10px; font-size: 16px; cursor: pointer; }
+    </style>
+    <script>
+        async function fetchCatFact() {
+            const response = await fetch('/get_cat_fact');
+            const data = await response.json();
+            document.getElementById('fact').innerText = data.cat_fact;
+        }
+
+        // Holt alle 10 Sekunden eine neue Katzen-Fakt
+        setInterval(fetchCatFact, 10000);
+    </script>
+</head>
+<body onload="fetchCatFact()">
+    <h1>🐱 Zufällige Katzen-Fakten</h1>
+    <p class="fact" id="fact">Lade eine Katzen-Fakt...</p>
+    <button onclick="fetchCatFact()">Neue Fakt abrufen</button>
+</body>
+</html>
